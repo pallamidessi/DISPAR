@@ -16,7 +16,7 @@
  */
 #include <cstdlib>
 #include <iostream>
-
+#include "tournament.h"
 int main(int argc, const char *argv[]) {
 
     return 0;

@@ -16,6 +16,9 @@
  */
 
 
+#ifndef TOURNAMENT_H
+#define TOURNAMENT_H
+
 #include <algorithm>
 #include <vector>
 #include <functional>
@@ -24,21 +27,7 @@ template <typename T, typename Alloc, template <typename, typename> class TT>
 int tournament(const int nbParents,
                const TT<T, Alloc>& fitnesses,
                const int pressure,
-               std::function<bool (const T&, const T&)> comparator) {
+               std::function<void (const T&, const T&)> comparator);
 
-    std::vector<int> selected;
-    for (int i = 0; i < pressure; i++) {
-        //selected.push_back(rand.random_int(0, nbParents - 1));
-    }
 
-    int bestIndex = selected[0];
-    T bestFitness = fitnesses[selected[0]];
-    for (int i = 0; i < selected.size(); i++) {
-        if ( comparator(bestFitness, fitnesses[i]) ) {
-            bestFitness = fitnesses[selected[i]];
-            bestIndex = selected[i];
-        }
-    }
-
-    return bestIndex;
-}
+#endif /* end of include guard: TOURNAMENT_H */

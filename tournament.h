@@ -24,9 +24,8 @@
 #include <functional>
 
 template <typename T, typename Alloc, template <typename, typename> class TT>
-int tournament(const int nbParents,
-               const TT<T, Alloc>& fitnesses,
-               const int pressure,
+int tournament(const TT<T, Alloc>& fitnesses,
+               const std::vector<int>& keys,
                std::function<void (const T&, const T&)> comparator);
 
 

@@ -7,7 +7,7 @@ matrix createRandomTournamentPool(T container,
                                   const size_t nbGroup,
                                   const size_t poolSize) {
 
-    std::bitset<1> bs(container.size());
+    std::vector<bool> bs(size);
     matrix pools(nbGroup);
 
     size_t cardinality = 0;
@@ -17,12 +17,13 @@ matrix createRandomTournamentPool(T container,
     }
 
     while(cardinality < nbGroup * poolSize) {
-        //int v = rand.nextInt(container.size());
+        //int v = rand.random_int(offset, size - 1);
         int v = 0;
         if(!bs[v]) {
             bs[v];
-            cardinality++;
+            bs[v] = true;
             pools[cardinality / poolSize][cardinality % poolSize] = v;
+            cardinality++;
         }
     }
 

@@ -16,9 +16,25 @@
  */
 #include <cstdlib>
 #include <iostream>
-#include "tournament.h"
-int main(int argc, const char *argv[]) {
+#include <algorithm>
+#include <vector>
+#include "dispar.h"
 
+bool intComparator (const int& a, const int& b) {
+    return a > b;
+}
+
+int main(int argc, const char *argv[]) {
+    std::vector<int> test_data(20);
+    std::iota(test_data.begin(), test_data.end(), 0);
+
+    std::function<bool (const int& a, const int& b)> comp = intComparator;
+    size_t toto = 5;
+    auto res = selection(toto, test_data, comp);
+
+    for (auto&& key: res) {
+        std::cout << key << std::endl;
+    }
     return 0;
 }
 

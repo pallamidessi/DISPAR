@@ -30,7 +30,6 @@ matrix createRandomTournamentPool(T container,
         if(!bs[v]) {
             bs[v] = true;
             size_t poolNumber = cardinality / poolSize;
-            size_t poolPosition = cardinality % poolSize;
             pools[poolNumber].push_back(v);
             cardinality++;
         }
@@ -44,20 +43,24 @@ std::vector<int> selection(const size_t targetSize,
                            TT<T, Alloc> container,
                            std::function<bool (const T&, const T&)> comparator) {
 
-    const size_t nbGroup = 4;
+    const size_t nbGroup = targetSize;
     const size_t poolSize = 5;
 
     std::vector<int> selected_keys(nbGroup);
     Rand rand;
 
     matrix pools = createRandomTournamentPool(container, nbGroup, poolSize, rand);
+
+#ifdef DEBUG_PRINT
     for(auto&& pool: pools) {
-        std::cout << "[" << std::endl;
+        std::cout << "[";
         for (auto&& item : pool) {
             std::cout << item << ", ";
         }
         std::cout << "]\n" << std::endl;
     }
+#endif
+
     #pragma omp parallel for
     for (size_t i = 0; i < pools.size(); i++) {
         selected_keys[i] = tournamentByKey<T, Alloc, TT>(container, pools[i],

@@ -29,12 +29,13 @@ int main(int argc, const char *argv[]) {
     std::iota(test_data.begin(), test_data.end(), 0);
 
     std::function<bool (const int& a, const int& b)> comp = intComparator;
-    size_t toto = 5;
-    auto res = selection(toto, test_data, comp);
 
+    auto res = selection(4, test_data, comp);
+#ifdef DEBUG_PRINT
     for (auto&& key: res) {
         std::cout << key << std::endl;
     }
+#endif
     return 0;
 }
 

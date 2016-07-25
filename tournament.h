@@ -24,9 +24,19 @@
 #include <functional>
 
 template <typename T, typename Alloc, template <typename, typename> class TT>
-int tournament(const TT<T, Alloc>& fitnesses,
-               const std::vector<int>& keys,
-               std::function<void (const T&, const T&)> comparator);
+int tournamentByKey(const TT<T, Alloc>& fitnesses,
+                    const std::vector<int>& keys,
+                    std::function<bool (const T&, const T&)> comparator) {
 
+    int bestIndex = keys[0];
+    T bestFitness = fitnesses[keys[0]];
+    for (size_t i = 0; i < keys.size(); i++) {
+        if ( comparator(bestFitness, fitnesses[i]) ) {
+            bestFitness = fitnesses[keys[i]];
+            bestIndex = keys[i];
+        }
+    }
 
+    return bestIndex;
+}
 #endif /* end of include guard: TOURNAMENT_H */
